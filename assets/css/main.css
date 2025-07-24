@@ -1042,11 +1042,13 @@ section,
   font-size: 4rem;
 }
 
-.services .content .service-item .service-item-content .service-heading {
-  font-size: 20px;
+.services .content .service-item .service-item-content .service-heading  {
+  font-size: 10rem;
   color: var(--default-color);
   font-weight: 400;
 }
+
+
 
 .services .content .service-item .service-item-content p {
   font-size: 15px;
@@ -2348,3 +2350,4 @@ section,
   color: color-mix(in srgb, var(--default-color), transparent 60%);
   font-size: 14px;
 }
+

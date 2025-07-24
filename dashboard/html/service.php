@@ -3,147 +3,86 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<!-- Le lien pour les icons Boxicons -->
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-	<!-- My CSS -->
 	<link rel="stylesheet" href="../css/style.css">
 	<title>MIDONMI</title>
 </head>
 <body>
 
-	<!-------------------------------------------------SIDEBAR--------------------------------------------->
+	<?php include 'includes/sidebar.php'; ?>
 
-	<!-- SIDEBAR -->
-		<?php include 'includes/sidebar.php'; ?>
-	<!-- SIDEBAR -->
-
-	<!-------------------------------------------------CONTENT--------------------------------------------->
-
-	<!-- CONTENT -->
 	<section id="content">
-		<!-- NAVBAR -->
 		<nav>
-			<i class='bx bx-menu' ></i>
-			<a href="#" class="nav-link"><!-- Categories --></a>
-			<form action="#" onsubmit="return false">
+			<i class='bx bx-menu'></i>
+			<form onsubmit="return false">
 				<div class="form-input">
 					<input type="search" id="searchInput" placeholder="Rechercher...">
-					<button  ><i class='bx bx-search' ></i></button>
+					<button><i class='bx bx-search'></i></button>
 				</div>
 			</form>
 			<input type="checkbox" id="switch-mode" hidden>
 			<label for="switch-mode" class="switch-mode"></label>
-			<!-- <a href="#" class="notification">
-				<i class='bx bxs-bell' ></i>
-				<span class="num">8</span>
-			</a> -->
-			<a href="#" class="profile">
-				<!-- <img src="img/people.png"> -->
-				 <h1>VA</h1>
-			</a>
+			<a href="#" class="profile"><h1>VA</h1></a>
 		</nav>
-		<!-- NAVBAR -->
 
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		<!-- MAIN -->
 		<main>
 			<div class="head-title">
 				<div class="left">
 					<h1>Demande de Services</h1>
-					
 				</div>
-				
-				
-				
-				
-				
-				
-				
-				
-				<!-- <a href="#" class="btn-download">
-					<i class='bx bxs-cloud-download' ></i>
-					<span class="text">Download PDF</span>
-				</a> -->
 			</div>
 
-			
-									<!-- ---------------------------------------------------------------- -->
-
-			<!-- CARTE header -->
 			<?php include 'includes/carte_header.php'; ?>
-			<!-- CARTE header -->
-									<!-- ---------------------------------------------------------------- -->												
-			
 
-
-
-
-
-
-
-			
-
-
-
-			
-
-
-
-
-
-			
-
-			<!-- Tableau Demande de services -->
 			<div class="table-data">
-    <div class="order">
-        <div class="head" style="display: flex; align-items: center; justify-content: space-between;">
-            <h1>Demande de services</h1>
-            <button id="downloadPdfBtn" class="btn-download" style="background:#485a64;color:#fff;border:none;padding:8px 18px;border-radius:8px;display:flex;align-items:center;gap:7px;cursor:pointer;">
-                <i class='bx bxs-cloud-download'></i>
-                Télécharger PDF
-            </button>
-        </div>
-        <div class="table-responsive" id="tableToDownload">
-            <table class="table" id="table-demandes">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nom</th>
-                        <th>Prénoms</th>
-                        <th>Services</th>
-                        <th>Téléphone</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody id="serviceTableBody">
-                    <!-- Rempli par JS -->
-                </tbody>
-            </table>
-        </div>
-        <nav>
-            <ul class="pagination justify-content-center" id="pagination">
-                <!-- Pagination JS -->
-            </ul>
-        </nav>
-    </div>
-</div>
+				<div class="order">
+					<div class="head" style="display: flex; justify-content: space-between; align-items: center;">
+						<h1>Demande de services</h1>
+						<button id="downloadPdfBtn" class="btn-download" style="background:#485a64;color:#fff;border:none;padding:8px 18px;border-radius:8px;display:flex;align-items:center;gap:7px;cursor:pointer;">
+							<i class='bx bxs-cloud-download'></i> Télécharger PDF
+						</button>
+					</div>
+					<div class="table-responsive" id="tableToDownload">
+						<table class="table" id="serviceTable">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Nom</th>
+									<th>Prénoms</th>
+									<th>Services</th>
+									<th>Téléphone</th>
+									<th>Date</th>
+									<th>Status</th>
+								</tr>
+							</thead>
+							<tbody id="serviceTableBody"></tbody>
+						</table>
+					</div>
+					<nav>
+						<ul class="pagination justify-content-center" id="pagination"></ul>
+					</nav>
+				</div>
+			</div>
 
-<style>
+			<!-- Modale de confirmation -->
+			<div id="modalConfirmation" class="modal" style="display:none;">
+				<div class="modal-content">
+					<p>Voulez-vous vraiment changer le statut de cette demande ?</p>
+					<div class="modal-buttons">
+						<button id="confirmerBtn" class="confirm">Oui</button>
+						<button id="annulerBtn" class="cancel">Non</button>
+					</div>
+				</div>
+			</div>
+		</main>
+	</section>
+
+	<script src="../js/script.js"></script>
+	<script src="../js/chart.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+	<style>
     .table-responsive {
         overflow-x: auto;
         margin-bottom: 10px;
@@ -210,70 +149,150 @@
     }
 </style>
 
-<script>
-fetch('includes/get_demandes.php') // Assure-toi que le chemin est bon
-  .then(response => response.json())
-  .then(data => {
-    const tbody = document.querySelector('#table-demandes tbody');
-    tbody.innerHTML = ''; // Nettoie d'abord le tbody
-
-    data.forEach(demande => {
-      const row = document.createElement('tr');
-
-      row.innerHTML = `
-        <td>${demande.id}</td>
-        <td>${demande.nom}</td>
-        <td>${demande.prenom}</td>
-        <td>${demande.service}</td>
-        <td>${demande.tel}</td>
-        <td>${demande.date}</td>
-        <td>${demande.status}</td>
-      `;
-
-      tbody.appendChild(row);
-    });
-  })
-  .catch(error => console.error('Erreur lors du chargement des données :', error));
-</script>
-
-		</main>
-		<!-- MAIN -->
-	</section>
-	<!-- CONTENT -->
-	
-
-	<script src="../js/script.js"></script>
-	<script src="../js/chart.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 	<script>
-    document.getElementById('downloadPdfBtn').addEventListener('click', function () {
-        const tableDiv = document.getElementById('tableToDownload');
-        html2canvas(tableDiv).then(canvas => {
-            const imgData = canvas.toDataURL('image/png');
-            const pdf = new window.jspdf.jsPDF('l', 'mm', 'a4');
-            const pageWidth = pdf.internal.pageSize.getWidth();
-            const pageHeight = pdf.internal.pageSize.getHeight();
-            const imgWidth = pageWidth - 20;
-            const imgHeight = canvas.height * imgWidth / canvas.width;
-            pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
-            pdf.save('demande_services.pdf');
-        });
-    });
-</script>
+		let demandes = [];
+		let filteredDemandes = [];
+		let currentPage = 1;
+		let selectedDemandeId = null;
+		const rowsPerPage = 10;
+		const statusList = ["En attente", "Traité", "Echoué"];
 
-<!-- Modale de confirmation -->
-<div id="modalConfirmation" class="modal" style="display:none;">
-  <div class="modal-content">
-    <p>Voulez-vous vraiment changer le statut de cette demande ?</p>
-    <div class="modal-buttons">
-      <button id="confirmerBtn" class="confirm">Oui</button>
-      <button id="annulerBtn" class="cancel">Non</button>
-    </div>
-  </div>
-</div>
+		function fetchDemandes() {
+			fetch('./includes/get_demandes.php')
+				.then(response => response.json())
+				.then(data => {
+					demandes = data;
+					filteredDemandes = [...demandes];
+					renderTable(currentPage, filteredDemandes);
+					renderPagination(filteredDemandes);
+				});
+		}
 
-<style>
+		function getBadge(status, id) {
+			let badgeClass = status === "Traité" ? "badge-traite" :
+							 status === "Echoué" ? "badge-echoue" : "badge-attente";
+			return `<span class="badge ${badgeClass} status-badge" data-id="${id}" style="cursor:pointer">${status}</span>`;
+		}
+
+		function filterDemandes(query) {
+			query = query.toLowerCase();
+			return demandes.filter(d =>
+				d.nom.toLowerCase().includes(query) ||
+				d.prenoms.toLowerCase().includes(query) ||
+				d.service.toLowerCase().includes(query) ||
+				d.tel.toLowerCase().includes(query) ||
+				d.date.toLowerCase().includes(query) ||
+				d.status.toLowerCase().includes(query)
+			);
+		}
+
+		function renderTable(page, data) {
+			const tbody = document.getElementById('serviceTableBody');
+			tbody.innerHTML = '';
+			const start = (page - 1) * rowsPerPage;
+			const end = start + rowsPerPage;
+			const pageData = data.slice(start, end);
+
+			pageData.forEach(demande => {
+				tbody.innerHTML += `
+					<tr>
+						<td>${demande.id}</td>
+						<td>${demande.nom}</td>
+						<td>${demande.prenoms}</td>
+						<td>${demande.service}</td>
+						<td>${demande.tel}</td>
+						<td>${demande.date}</td>
+						<td>${getBadge(demande.status, demande.id)}</td>
+					</tr>
+				`;
+			});
+
+			document.querySelectorAll('.status-badge').forEach(badge => {
+				badge.addEventListener('click', function () {
+					selectedDemandeId = parseInt(this.getAttribute('data-id'));
+					document.getElementById('modalConfirmation').style.display = 'flex';
+				});
+			});
+		}
+
+		function renderPagination(data) {
+			const totalPages = Math.ceil(data.length / rowsPerPage);
+			const pagination = document.getElementById('pagination');
+			pagination.innerHTML = '';
+
+			for (let i = 1; i <= totalPages; i++) {
+				pagination.innerHTML += `
+					<li class="page-item${i === currentPage ? ' active' : ''}">
+						<a class="page-link" href="#" onclick="gotoPage(${i});return false;">${i}</a>
+					</li>
+				`;
+			}
+		}
+
+		function gotoPage(page) {
+			currentPage = page;
+			renderTable(currentPage, filteredDemandes);
+			renderPagination(filteredDemandes);
+		}
+
+		document.addEventListener('DOMContentLoaded', function () {
+			fetchDemandes();
+
+			document.getElementById('searchInput').addEventListener('input', function () {
+				filteredDemandes = filterDemandes(this.value);
+				currentPage = 1;
+				renderTable(currentPage, filteredDemandes);
+				renderPagination(filteredDemandes);
+			});
+
+			document.getElementById('confirmerBtn').addEventListener('click', function () {
+				if (selectedDemandeId !== null) {
+					let demande = demandes.find(d => d.id == selectedDemandeId);
+					let currentIndex = statusList.indexOf(demande.status);
+					let nextStatus = statusList[(currentIndex + 1) % statusList.length];
+
+					const formData = new FormData();
+					formData.append("id", selectedDemandeId);
+					formData.append("status", nextStatus);
+
+					fetch('./includes/update_status.php', {
+						method: "POST",
+						body: formData
+					})
+					.then(response => response.text())
+					.then(result => {
+						if (result === "OK") {
+							demande.status = nextStatus;
+							document.getElementById('modalConfirmation').style.display = 'none';
+							renderTable(currentPage, filteredDemandes);
+						} else {
+							alert("Erreur lors de la mise à jour");
+						}
+					});
+				}
+			});
+
+			document.getElementById('annulerBtn').addEventListener('click', function () {
+				selectedDemandeId = null;
+				document.getElementById('modalConfirmation').style.display = 'none';
+			});
+		});
+
+		document.getElementById('downloadPdfBtn').addEventListener('click', function () {
+			const tableDiv = document.getElementById('tableToDownload');
+			html2canvas(tableDiv).then(canvas => {
+				const imgData = canvas.toDataURL('image/png');
+				const pdf = new window.jspdf.jsPDF('l', 'mm', 'a4');
+				const pageWidth = pdf.internal.pageSize.getWidth();
+				const imgWidth = pageWidth - 20;
+				const imgHeight = canvas.height * imgWidth / canvas.width;
+				pdf.addImage(imgData, 'PNG', 10, 10, imgWidth, imgHeight);
+				pdf.save('demande_services.pdf');
+			});
+		});
+	</script>
+
+	<style>
   .modal {
     position: fixed;
     z-index: 9999;
@@ -317,90 +336,6 @@ fetch('includes/get_demandes.php') // Assure-toi que le chemin est bon
     cursor: pointer;
   }
 </style>
-
-
-
-<script>
-    function filterDemandes(query) {
-  query = query.toLowerCase();
-  return demandes.filter(d =>
-    d.nom.toLowerCase().includes(query) ||
-    d.prenoms.toLowerCase().includes(query) ||
-    d.service.toLowerCase().includes(query) ||
-    d.tel.toLowerCase().includes(query) ||
-    d.date.toLowerCase().includes(query) ||
-    d.status.toLowerCase().includes(query)
-  );
-}
-
-function renderTable(page, data = demandes) {
-  const tbody = document.getElementById('serviceTableBody');
-  tbody.innerHTML = '';
-  const start = (page - 1) * rowsPerPage;
-  const end = start + rowsPerPage;
-  const pageData = data.slice(start, end);
-
-  pageData.forEach(demande => {
-    tbody.innerHTML += `
-      <tr>
-        <td>${demande.id}</td>
-        <td>${demande.nom}</td>
-        <td>${demande.prenoms}</td>
-        <td>${demande.service}</td>
-        <td>${demande.tel}</td>
-        <td>${demande.date}</td>
-        <td>${getBadge(demande.status, demande.id)}</td>
-      </tr>
-    `;
-  });
-
-  document.querySelectorAll('.status-badge').forEach(badge => {
-    badge.addEventListener('click', function () {
-      selectedDemandeId = parseInt(this.getAttribute('data-id'));
-      document.getElementById('modalConfirmation').style.display = 'flex';
-    });
-  });
-}
-
-function renderPagination(data = demandes) {
-  const totalPages = Math.ceil(data.length / rowsPerPage);
-  const pagination = document.getElementById('pagination');
-  pagination.innerHTML = '';
-
-  for (let i = 1; i <= totalPages; i++) {
-    pagination.innerHTML += `
-      <li class="page-item${i === currentPage ? ' active' : ''}">
-        <a class="page-link" href="#" onclick="gotoPage(${i});return false;">${i}</a>
-      </li>
-    `;
-  }
-}
-
-function gotoPage(page, filteredData = demandes) {
-  currentPage = page;
-  renderTable(currentPage, filteredData);
-  renderPagination(filteredData);
-}
-
-// Initialisation
-let filteredDemandes = demandes;
-document.addEventListener('DOMContentLoaded', function() {
-  renderTable(currentPage);
-  renderPagination();
-
-  const searchInput = document.getElementById('searchInput');
-  searchInput.addEventListener('input', function () {
-    filteredDemandes = filterDemandes(this.value);
-    currentPage = 1;
-    renderTable(currentPage, filteredDemandes);
-    renderPagination(filteredDemandes);
-  });
-
-  window.gotoPage = (page) => gotoPage(page, filteredDemandes);
-});
-
-</script>
-
 
 </body>
 </html>

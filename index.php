@@ -105,7 +105,7 @@
               <li>la recherche de maisons et chambres à louer pour vos séjours au Togo</li>
             </ul>
 
-            <p><a href="#" class="btn-cta">Cliquez pour un service ?</a></p>
+            <p><a href="contact.php" class="btn-cta">Contactez-Nous</a></p>
           </div>
         </div>
       </div>

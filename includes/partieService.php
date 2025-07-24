@@ -8,12 +8,10 @@
                   <img src="assets/img/OIP.jpg" alt="">
                 </div>
                 <div class="service-item-content">
-                  <h3 class="service-heading">SUIVI DE VOS TRAVAUX DE CONSTRUCTION</h3>
-                  <aside style="text-align: center; margin-top: 9%;">
-                    <button class="btn btn-success">
-                    <a href="login.html" class="btn btn-success">Faire une demande</a>
-                  </button>
-                  </aside>
+                  <h3 class="service-heading" style="text-align: center; font-weight:700; padding: 0px; font-size: 1.4rem; font-family:'League Spartan', sans-serif; color:rgb(72,90,102);">
+                    SUIVI DE VOS TRAVAUX DE CONSTRUCTION
+                  </h3>
+                  
                   
                   <!-- <p>
                     Gravida sodales condimentum pellen tesq accumsan orci quam
@@ -29,11 +27,9 @@
                   <img src="assets/img/hero_2.jpg" alt="">
                 </div>
                 <div class="service-item-content">
-                  <h3 class="service-heading">RECOUVREMENT DE VOS LOYERS</h3>
+                  <h3 class="service-heading" style="text-align: center; font-weight:700; padding: 0px; font-size: 1.4rem; font-family:'League Spartan', sans-serif; color:rgb(72,90,102);">RECOUVREMENT DE VOS LOYERS</h3>
                   <aside style="text-align: center; margin-top: 9%;">
-                    <button class="btn btn-success">
-                    <a href="login.html" class="btn btn-success">Faire une demande</a>
-                  </button>
+                    
                 </div>
               </div>
             </div>
@@ -44,11 +40,9 @@
                   <img src="assets/img/b5.jpg" alt="">
                 </div>
                 <div class="service-item-content">
-                  <h3 class="service-heading">FAIRE DES COURSES POUR VOUS AU TOGO, etc...</h3>
+                  <h3 class="service-heading" style="text-align: center; font-weight:700; padding: 0px; font-size: 1.4rem; font-family:'League Spartan', sans-serif; color:rgb(72,90,102);">FAIRE DES COURSES POUR VOUS AU TOGO, etc...</h3>
                   <aside style="text-align: center;">
-                    <button class="btn btn-success">
-                    <a href="login.html" class="btn btn-success">Faire une demande</a>
-                  </button>
+                   
                 </div>
               </div>
             </div>
@@ -59,11 +53,9 @@
                   <img src="assets/img/14.jpg" alt="">
                 </div>
                 <div class="service-item-content">
-                  <h3 class="service-heading">RETRAIT ET REMISE D'ARGENT, COLIS ... AUX MEMBRES DE VOS FAMILLES</h3>
+                  <h3 class="service-heading" style="text-align: center; font-weight:700; padding: 0px; font-size: 1.4rem; font-family:'League Spartan', sans-serif; color:rgb(72,90,102);">RETRAIT ET REMISE D'ARGENT, COLIS ... AUX MEMBRES DE VOS FAMILLES</h3>
                   <aside style="text-align: center;">
-                    <button class="btn btn-success">
-                    <a href="login.html" class="btn btn-success">Faire une demande</a>
-                  </button>
+                    
                 </div>
               </div>
             </div>
@@ -75,11 +67,9 @@
                   <img src="assets/img/18.jpg" alt="">
                 </div>
                 <div class="service-item-content">
-                  <h3 class="service-heading">FORMALITÉS ADMINISTRATIVES D'ACHAT DE TERRAINS SÉCURISÉS</h3>
+                  <h3 class="service-heading" style="text-align: center; font-weight:700; padding: 0px; font-size: 1.4rem; font-family:'League Spartan', sans-serif; color:rgb(72,90,102);">FORMALITÉS ADMINISTRATIVES D'ACHAT DE TERRAINS SÉCURISÉS</h3>
                   <aside style="text-align: center;">
-                    <button class="btn btn-success">
-                    <a href="login.html" class="btn btn-success">Faire une demande</a>
-                  </button>
+                    
                 </div>
               </div>
             </div>
@@ -91,11 +81,9 @@
                   
                 </div>
                 <div class="service-item-content">
-                  <h3 class="service-heading">MAISONS, CHAMBRES À LOUER POUR VOS SÉJOURS AU TOGO</h3>
+                  <h3 class="service-heading" style="text-align: center; font-weight:700; padding: 0px; font-size: 1.4rem; font-family:'League Spartan', sans-serif; color:rgb(72,90,102);">MAISONS, CHAMBRES À LOUER POUR VOS SÉJOURS AU TOGO</h3>
                   <aside style="text-align: center;">
-                    <button class="btn btn-success">
-                    <a href="login.html" class="btn btn-success">Faire une demande</a>
-                  </button>
+                    
                 </div>
               </div>
             </div>
@@ -128,7 +116,7 @@
 
             <p>
               <a href="#" class="btn-cta" data-bs-toggle="modal" data-bs-target="#demandeServiceModal">
-  Cliquez pour tout autre service
+  Cliquez pour tout service
               </a>
             </p>
           </div>

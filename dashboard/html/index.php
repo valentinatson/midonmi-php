@@ -20,6 +20,8 @@
 		<nav>
 			<i class='bx bx-menu' style="font-size: 30px; font-weight: 600;"></i>
 
+			<h3>Midonmi Admin Panel</h3>
+
 			<form action="#" class="form-input">
 				<!-- Barre de recherche future -->
 			</form>
@@ -50,7 +52,30 @@
 						<button id="toggleFormBtn" class="btn-toggle">+</button>
 					</div>
 
-					<form action="forms/ajouter-article.php" method="POST" enctype="multipart/form-data">
+					<form id="blogForm" action="forms/ajouter-article.php" method="POST" enctype="multipart/form-data" class="collapsed">
+
+					<style>
+						#blogForm.collapsed {
+							display: none;
+						}
+
+						.btn-toggle {
+							font-size: 1.5rem;
+							padding: 5px 15px;
+							cursor: pointer;
+							border: none;
+							border-radius: 5px;
+							background-color: #2a2a72;
+							color: white;
+							transition: background 0.3s ease;
+						}
+
+						.btn-toggle:hover {
+							background-color: #1a1a50;
+						}
+
+					</style>
+
 
 						<div class="form-group">
 							<label for="title">Titre de l'article</label>
@@ -120,14 +145,17 @@ if ($result && $result->num_rows > 0):
         $status = $row['status'];
 ?>
     <div class="article-card" id="article-<?= $row['id_article'] ?>">
-        <img src="<?= $imagePath ?>" alt="Image article" class="article-image" />
+		<a href="blog-details.php?id_article=<?= $row['id_article'] ?>">
+			<img src="<?= $imagePath ?>" alt="Image article" class="article-image" />
+		</a>
+        
         <div class="article-content">
             <h3><?= $titre ?></h3>
             <p class="article-date"><?= $date ?></p>
             <p><?= $contenu ?></p>
             <div class="article-actions">
-                <a href="blog-details.php?id=<?= $row['id_article'] ?>" class="btn-read">Lire plus</a>
-                <button class="btn-delete" onclick="supprimerArticle(this, <?= $row['id_article'] ?>)">Supprimer</button>
+                
+                <button class="btn-delete" style="padding-right: 20%; " onclick="supprimerArticle(this, <?= $row['id_article'] ?>)" id="bouton-supprimer-article" >Supprimer</button>
 
                 <span class="badge <?= $status === 'active' ? 'badge-success' : 'badge-danger' ?>"
                       onclick="toggleStatus(<?= $row['id_article'] ?>, '<?= $status ?>')"
@@ -191,13 +219,28 @@ $conn->close();
 	</script>
 
 	<script>
-		function supprimerArticle(btn) {
-			if (confirm("Voulez-vous vraiment supprimer cet article ?")) {
-				const articleCard = btn.closest(".article-card");
-				articleCard.remove(); // Suppression visuelle
-				// TODO : envoyer une requête pour supprimer dans la base
-			}
-		}
+		function supprimerArticle(btn, id) {
+    if (confirm("Voulez-vous vraiment supprimer cet article ?")) {
+        fetch('supprimer-article.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `id_article=${id}`
+        })
+        .then(res => res.text())
+        .then(response => {
+            if (response === 'success') {
+                const articleCard = document.getElementById(`article-${id}`);
+                articleCard.remove(); // Supprime du DOM
+            } else {
+                alert("Erreur lors de la suppression.");
+            }
+        })
+        .catch(() => {
+            alert("Erreur réseau.");
+        });
+    }
+}
+
 	</script>
 
     <!-- ----------------------Le JavaScript pour changer le statut sans recharger la page---------------------- -->
@@ -224,6 +267,9 @@ function toggleStatus(id, currentStatus) {
     .catch(() => alert("Erreur réseau."));
 }
 </script>
+
+<!-- ----------------------------------script pour plier et déplier le formulaire d'article----------------------------------- -->
+
 
 
 

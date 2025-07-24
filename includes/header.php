@@ -13,19 +13,25 @@ if (session_status() === PHP_SESSION_NONE) {
 
     <nav id="navmenu" class="navmenu">
       <ul>
-        <li><a href="index.php" class="active">Accueil</a></li>
-        <li><a href="services.php">Nos Services</a></li>
-        <li><a href="client.php">Espace client</a></li>
-        <li><a href="blog.php">Blog/FAQ</a></li>
+        <?php
+$current = basename($_SERVER['PHP_SELF']);
+?>
 
-        <li class="dropdown"><a href="#"><span>À propos</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
-          <ul>
-            <li><a href="testimonials.php">Témoignages</a></li>
-            <li><a href="contact.php">Contact</a></li>
-          </ul>
-        </li>
+<li><a href="index.php" class="<?= $current == 'index.php' ? 'active' : '' ?>">Accueil</a></li>
+<li><a href="services.php" class="<?= $current == 'services.php' ? 'active' : '' ?>">Nos Services</a></li>
+<li><a href="client.php" class="<?= $current == 'client.php' ? 'active' : '' ?>">Espace client</a></li>
+<li><a href="blog.php" class="<?= $current == 'blog.php' ? 'active' : '' ?>">Blog/FAQ</a></li>
 
-        <li>
+<li class="dropdown">
+  <a href="#" class="<?= in_array($current, ['testimonials.php', 'contact.php']) ? 'active' : '' ?>">
+    <span>À propos</span> <i class="bi bi-chevron-down toggle-dropdown"></i>
+  </a>
+  <ul>
+    <li><a href="testimonials.php" class="<?= $current == 'testimonials.php' ? 'active' : '' ?>">Témoignages</a></li>
+    <li><a href="contact.php" class="<?= $current == 'contact.php' ? 'active' : '' ?>">Contact</a></li>
+  </ul>
+</li>
+
   <?php if (isset($_SESSION['user_id'])): ?>
     <a href="logout.php" class="btn btn-danger" style="margin-left: 10px; padding-right: 15px; font-size: large; border-radius: 15px; padding-top: 5px; padding-bottom: 5px; color: white;">Déconnexion</a>
   <?php else: ?>

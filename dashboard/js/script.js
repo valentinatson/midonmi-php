@@ -1,15 +1,21 @@
+// Récupère tous les liens du menu
 const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
 
-allSideMenu.forEach(item=> {
-	const li = item.parentElement;
+// Réinitialise tous les liens au cas où
+allSideMenu.forEach(i => i.parentElement.classList.remove('active'));
 
-	item.addEventListener('click', function () {
-		allSideMenu.forEach(i=> {
-			i.parentElement.classList.remove('active');
-		})
+// Détecte l'URL actuelle
+const currentPage = window.location.pathname.split("/").pop(); // ex: "service.php"
+
+allSideMenu.forEach(item => {
+	const li = item.parentElement;
+	const linkPage = item.getAttribute("href").split("/").pop(); // ex: "service.php"
+
+	if (linkPage === currentPage) {
 		li.classList.add('active');
-	})
+	}
 });
+
 
 
 

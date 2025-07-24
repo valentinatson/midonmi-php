@@ -1,3 +1,10 @@
+<?php
+require_once 'article-process.php'; // ajuste le chemin si besoin
+?>
+
+
+
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -11,6 +18,7 @@
 	<title>MIDONMI</title>
 </head>
 <body>
+  
 
 	<!-------------------------------------------------SIDEBAR--------------------------------------------->
 
@@ -59,93 +67,88 @@
 <div class="table-data">
   <div class="order">
     <div class="head">
+      
       <h1>Détails de l'article</h1>
+      <a href="index.php" class="btn-retour">← Retour à la liste des articles</a>
+      <style>
+        .btn-retour {
+  display: inline-block;
+  margin: 20px 0;
+  padding: 10px 20px;
+  background-color: #2a2a72;
+  color: white;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.btn-retour:hover {
+  background-color: #1a1a50;
+}
+
+      </style>
     </div>
 
     <div class="article-detail">
       <div class="article-main">
         <div class="article-image">
-          <img src="../img/testimonials-1.jpg" alt="Image de l'article">
-        </div>
+  <?php if (!empty($article['image'])): ?>
+    <img src="../<?= htmlspecialchars($article['image']) ?>" alt="Image de l'article">
+  <?php else: ?>
+    <img src="../img/testimonials-1.jpg" alt="Image de l'article par défaut">
+  <?php endif; ?>
+</div>
+
         <div class="article-info">
-          <h2 class="article-title">Le lotissage de terrain</h2>
-          <p class="article-date">Publié le 12 Décembre 2025</p>
-          <div class="article-content">
-            <p>
-              Cet article décrit les différentes étapes et règles du lotissement de terrain. Il explique les obligations administratives, les documents requis, les coûts associés et les pièges à éviter lors d’un achat de terrain destiné à être loti.
-            </p>
-          </div>
-        </div>
+  <h2 class="article-title"><?= htmlspecialchars($article['titre']) ?></h2>
+  <p class="article-date">Publié le <?= $article['date_article'] ?></p>
+  <div class="article-content">
+    <p><?= nl2br(htmlspecialchars($article['contenu'])) ?></p>
+  </div>
+</div>
+
       </div>
 
       <hr style="margin: 2rem 0;">
 
       <div class="comments-section">
-        <h3>Commentaires (3)</h3>
+  <h3>Commentaires (<?= count($commentaires) ?>)</h3>
 
-        <div class="comment-card">
-  <p><strong>Alice</strong> (2025-06-20) :</p>
-  <p>Très bon article ! J’ai appris beaucoup sur le sujet.</p>
-  
-  <div class="reponses">
-    <div class="reponse-commentaire">
-      <strong>Réponse admin :</strong>
-      <p>Merci Alice pour votre retour !</p>
-    </div>
-    <!-- Les nouvelles réponses s'ajouteront ici -->
-  </div>
+  <?php foreach ($commentaires as $comment): ?>
+    <div class="comment-card">
+      <p><strong><?= htmlspecialchars($comment['prenom'] . ' ' . $comment['nom']) ?></strong> (<?= $comment['date_commentaire'] ?>) :</p>
+      <p><?= nl2br(htmlspecialchars($comment['contenu'])) ?></p>
 
-  <div class="comment-actions">
-    <button class="btn-repondre" onclick="afficherTextarea(this)">Répondre</button>
-    <button class="btn-desactiver" onclick="desactiverCommentaire(this)">Désactiver</button>
-  </div>
-  <div class="reply-box"></div>
-</div>
+      <div class="reponses">
+        <?php
+        // Charger les réponses de ce commentaire
+        $stmt = $conn->prepare("
+          SELECT r.*, a.nom 
+          FROM reponses r 
+          JOIN admins a ON r.id_admin = a.id_admin 
+          WHERE r.id_commentaire = ?
+        ");
+        $stmt->bind_param("i", $comment['id_commentaire']);
+        $stmt->execute();
+        $reponses = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-
-
-        <div class="comment-card">
-  <p><strong>Alice</strong> (2025-06-20) :</p>
-  <p>Très bon article ! J’ai appris beaucoup sur le sujet.</p>
-  
-  <div class="reponses">
-    <div class="reponse-commentaire">
-      <strong>Réponse admin :</strong>
-      <p>Merci Alice pour votre retour !</p>
-    </div>
-    <!-- Les nouvelles réponses s'ajouteront ici -->
-  </div>
-
-  <div class="comment-actions">
-    <button class="btn-repondre" onclick="afficherTextarea(this)">Répondre</button>
-    <button class="btn-desactiver" onclick="desactiverCommentaire(this)">Désactiver</button>
-  </div>
-  <div class="reply-box"></div>
-</div>
-
-
-
-        <div class="comment-card">
-  <p><strong>Alice</strong> (2025-06-20) :</p>
-  <p>Très bon article ! J’ai appris beaucoup sur le sujet.</p>
-  
-  <div class="reponses">
-    <div class="reponse-commentaire">
-      <strong>Réponse admin :</strong>
-      <p>Merci Alice pour votre retour !</p>
-    </div>
-    <!-- Les nouvelles réponses s'ajouteront ici -->
-  </div>
-
-  <div class="comment-actions">
-    <button class="btn-repondre" onclick="afficherTextarea(this)">Répondre</button>
-    <button class="btn-desactiver" onclick="desactiverCommentaire(this)">Désactiver</button>
-  </div>
-  <div class="reply-box"></div>
-</div>
-
-
+        foreach ($reponses as $reponse): ?>
+          <div class="reponse-commentaire">
+            <strong>Réponse admin :</strong>
+            <p><?= nl2br(htmlspecialchars($reponse['contenu'])) ?></p>
+          </div>
+        <?php endforeach; ?>
       </div>
+
+      <div class="comment-actions">
+        <button class="btn-repondre" onclick="afficherTextarea(this)">Répondre</button>
+        <button class="btn-desactiver" onclick="desactiverCommentaire(this)">Désactiver</button>
+      </div>
+      <div class="reply-box"></div>
+    </div>
+  <?php endforeach; ?>
+</div>
+
     </div>
   </div>
 </div>
