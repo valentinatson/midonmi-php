@@ -55,7 +55,7 @@
   <main class="main">
 
     <!-- Page Title -->
-    <div class="page-title dark-background" data-aos="fade" style="background-image: url(assets/img/page-title-bg.webp);">
+    <div class="page-title dark-background" data-aos="fade" style="background-image: url(assets/img/page-title-bg.webp); margin-bottom:4rem; ">
       <div class="container position-relative">
         <h1>Nos Témoignages</h1>
         

@@ -108,14 +108,14 @@
             </a> -->
           </div>
           <div class="col-lg-5 order-lg-1" data-aos="fade-up" data-aos-delay="100">
-            <h2 class="content-title mb-12" >
-              <span class="text-primary">MIDONMI</span> est là pour vous rendre tout autre service!
+            <h2 class="content-title mb-12"  style="color: rgb(72, 90, 101);">
+              <span class="text-warning" >MIDONMI</span> est là pour vous rendre tout autre service!
             </h2>
             
             
 
             <p>
-              <a href="#" class="btn-cta" data-bs-toggle="modal" data-bs-target="#demandeServiceModal">
+              <a href="#" class="btn-cta" data-bs-toggle="modal" data-bs-target="#demandeServiceModal" style="background: rgb(72, 90, 101);">
   Cliquez pour tout service
               </a>
             </p>
@@ -128,7 +128,7 @@
     <!-- About Section -->
     <section id="about" class="about section">
 
-      <div class="content">
+      <div class="content"  style="background: rgb(72, 90, 101);">
         <div class="container">
           <div class="row">
             <div class="col-lg-6 mb-4 mb-lg-0">

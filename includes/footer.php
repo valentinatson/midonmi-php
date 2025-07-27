@@ -16,7 +16,7 @@
           </div>
 
           <div class="col-lg-2 col-md-3 footer-links">
-            <h4>Liens utiles</h4>
+            <h4 style="color: rgb(72, 90, 101);">Liens utiles</h4>
             <ul>
               <li><a href="#">Acceuil</a></li>
               <li><a href="#">À propos</a></li>
@@ -27,7 +27,7 @@
           </div>
 
           <div class="col-lg-2 col-md-3 footer-links">
-            <h4>Nos services</h4>
+            <h4 style="color: rgb(72, 90, 101);">Nos services</h4>
             <ul>
               <li><a href="#">suivi de vos travaux de construction</a></li>
               <li><a href="#">recouvrement de vos loyers</a></li>

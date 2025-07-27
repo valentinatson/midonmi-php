@@ -85,7 +85,7 @@
               <span class="play"><i class="bi bi-play-fill"></i></span>
             </a> -->
           </div>
-          <div class="col-lg-5 order-lg-1" data-aos="fade-up" data-aos-delay="100">
+          <div class="col-lg-5 order-lg-1" data-aos="fade-up" data-aos-delay="100" >
             <h2 class="content-title mb-4">
               MIDONMI vous simplifie la vie
             </h2>
